@@ -14,11 +14,21 @@ const PhotoListItem = (props) => {
 
     <section className="photo-list__item">
 
-      <img src={photoData.imageSource} />
-      <img src={photoData.profile} />
+      <img className="photo-list__image" src={photoData.imageSource} />
 
-      <p> {photoData.username} </p>
-      <p> {photoData.location.city}, {photoData.location.country} </p>
+
+      <div className="photo-list__user-details">
+
+        <img className="photo-list__user-profile" src={photoData.profile} />
+
+
+        <div className="photo-list__user-info">
+          <p className="photo-list__user-name">{photoData.username}</p>
+          <p className="photo-list__user-location">{photoData.location.city}, {photoData.location.country}</p>
+        </div>
+
+      </div>
+
 
     </section>
 
