@@ -1,7 +1,9 @@
 import React from "react";
-
 import "../styles/PhotoList.scss";
+import PhotoListItem from "./PhotoListItem";
 
+
+// An Array of Objects Simulating a Data Source
 const sampleDataForPhotoList = [
   {
     id: "1",
@@ -56,12 +58,34 @@ const sampleDataForPhotoList = [
   },
 ];
 
+
+
 const PhotoList = () => {
+
+
   return (
     <ul className="photo-list">
-      {/* Insert React */}
+
+      {/* Iterate over the data source, and generate `PhotoListItem` templates
+          for each photo. These templates will be passed `key` and `photoData`
+          values so that the `PhotoListItem` can be populated.
+      */}
+      {sampleDataForPhotoList.map((photoData) => (
+
+        <PhotoListItem
+
+          key={photoData.id}
+          photoData={photoData}
+
+        />
+
+      ))}
+
+
     </ul>
   );
+
 };
+
 
 export default PhotoList;
