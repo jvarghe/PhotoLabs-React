@@ -4,7 +4,7 @@ import FavBadge from './FavBadge';
 import TopicList from './TopicList';
 
 
-const TopNavigation = () => {
+const TopNavigationBar = () => {
 
   return (
     <div className="top-nav-bar">
@@ -24,4 +24,4 @@ const TopNavigation = () => {
 };
 
 
-export default TopNavigation;
+export default TopNavigationBar;
