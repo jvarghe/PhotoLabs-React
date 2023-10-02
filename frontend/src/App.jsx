@@ -1,15 +1,16 @@
 import PhotoList from 'components/PhotoList';
+import TopNavigationBar from 'components/TopNavigationBar';
+import TopicList from 'components/TopicList';
 import React from 'react';
 import './App.scss';
 
 
-// Note: Rendering a single component to build components in isolation
 const App = () => {
 
   return (
     <div className="App">
 
-      {/* PASSING DATA INTO REACT COMPONENTS */}
+      {/* CODE SAMPLES: PASSING DATA INTO REACT COMPONENTS */}
       {/* 1 Item: Generic `PhotoListItem` Entry */}
       {/* <PhotoListItem key={sampleDataForPhotoListItem.id} photoData={sampleDataForPhotoListItem} /> */}
 
@@ -20,7 +21,11 @@ const App = () => {
       a data source.) */}
       {/* {Array.from(Array(3)).map((_, index) => <PhotoListItem key={index} photoData={sampleDataForPhotoListItem} />)} */}
 
+
+      <TopNavigationBar />
+
       <PhotoList />
+
 
     </div>
   );
