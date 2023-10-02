@@ -1,13 +1,14 @@
-import PhotoList from 'components/PhotoList';
-import TopNavigationBar from 'components/TopNavigationBar';
-import TopicList from 'components/TopicList';
 import React from 'react';
+
+import HomeRoute from 'routes/HomeRoute';
+
 import './App.scss';
 
 
 const App = () => {
 
   return (
+
     <div className="App">
 
       {/* CODE SAMPLES: PASSING DATA INTO REACT COMPONENTS */}
@@ -22,12 +23,11 @@ const App = () => {
       {/* {Array.from(Array(3)).map((_, index) => <PhotoListItem key={index} photoData={sampleDataForPhotoListItem} />)} */}
 
 
-      <TopNavigationBar />
 
-      <PhotoList />
-
+      <HomeRoute />
 
     </div>
+
   );
 
 };
