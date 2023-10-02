@@ -20,13 +20,6 @@ const HomeRoute = () => {
   const hasFavourites = () => (favourites.length > 0) ? true : false;
 
 
-  // This function checks if Global Favourites State Array has more than one
-  // favourite in it. If so, the `FavIcon` (little red circle) in the `FavBadge`
-  // (which sits in the top-right corner of the heart icon on the Top
-  // Navigation Bar), will light up.
-  const moreThanOneFavouriteAdded = () => (favourites.length > 1) ? true : false;
-
-
   // `Console.log()` STATEMENTS MAY NOT PROPERLY SHOW HOOK DATA UNTIL AFTER RE-RENDER (???)
   //
   // Note: React is counter intuitive in some ways. If you change the state in
@@ -87,10 +80,7 @@ const HomeRoute = () => {
   return (
 
     <div className="home-route">
-      <TopNavigationBar
-        hasFavourites={hasFavourites}
-        moreThanOneFavouriteAdded={moreThanOneFavouriteAdded}
-      />
+      <TopNavigationBar hasFavourites={hasFavourites} />
       <PhotoList updateGlobalFavouritesList={updateGlobalFavouritesList} />
     </div>
 

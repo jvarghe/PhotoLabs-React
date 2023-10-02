@@ -10,7 +10,8 @@ import React from 'react';
  * takes boolean values.
  *
  * `displayAlert`: its not clear what it does. But it does display a small red-
- * yellow circle in the corner of the FavIcon heart.
+ * yellow circle in the corner of the FavIcon heart. It's supposed to be a
+ * display notification that at least one photo has been favourited.
  *
  */
 const FavIcon = ({ displayAlert, selected }) => {
@@ -20,10 +21,8 @@ const FavIcon = ({ displayAlert, selected }) => {
     // This creates a small heart image in the top-right of the
     // `TopNavigationBar`. The heart has a small circle in the top-right corner.
     // It appears that if any photo is favourited, the heart will turn from a
-    // red border to fully red. I'm not sure what the little circle is supposed
-    // to do, but it does have a red border and yellow fill. The red circle is
-    // probably supposed to turn on when more than one favourite item is
-    // selected.
+    // red border to fully red. The little circle is supposed to be a display
+    // notification; it has a red border and yellow fill.
     <svg width="20" height="17" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 
 

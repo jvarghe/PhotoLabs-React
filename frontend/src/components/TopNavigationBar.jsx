@@ -21,10 +21,7 @@ const TopNavigationBar = (props) => {
       <TopicList />
 
       {/* THE FAVOURITE BADGE */}
-      <FavBadge
-        hasFavourites={hasFavourites}
-        moreThanOneFavouriteAdded={props.moreThanOneFavouriteAdded}
-      />
+      <FavBadge hasFavourites={hasFavourites} />
 
     </div>
   );
