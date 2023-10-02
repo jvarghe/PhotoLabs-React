@@ -6,7 +6,10 @@ import TopicList from './TopicList';
 import '../styles/TopNavigationBar.scss';
 
 
-const TopNavigationBar = () => {
+const TopNavigationBar = (props) => {
+
+  const { hasFavourites } = props;
+
 
   return (
     <div className="top-nav-bar">
@@ -18,7 +21,10 @@ const TopNavigationBar = () => {
       <TopicList />
 
       {/* THE FAVOURITE BADGE */}
-      <FavBadge />
+      <FavBadge
+        hasFavourites={hasFavourites}
+        moreThanOneFavouriteAdded={props.moreThanOneFavouriteAdded}
+      />
 
     </div>
   );

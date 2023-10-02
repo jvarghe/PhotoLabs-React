@@ -13,7 +13,7 @@ const PhotoFavButton = function(props) {
   // global favourite photos.
   const updateGlobalFavouritesList = props.updateGlobalFavouritesList;
 
-  
+
   // LESSON LEARNED: THE KEY IS NOT A PROP AND CANNOT BE USED IN YOUR CODE
   //
   // const key = props.key;
@@ -31,7 +31,6 @@ const PhotoFavButton = function(props) {
   // will get a value of `undefined`. I tried to use the `key` (photoId) value
   // in a component chain that passed through 4-5 components. It took hours and
   // a mentor call to figure out why the `photoId` value was `undefined`.
-
 
 
   // A USESTATE HOOK TO HANDLE CLICKS ON THE FAVOURITE BUTTON

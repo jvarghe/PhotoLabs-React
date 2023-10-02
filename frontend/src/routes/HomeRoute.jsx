@@ -15,14 +15,28 @@ const HomeRoute = () => {
   const [favourites, setFavourites] = useState([]);
 
 
+  // This function checks if any favourites exist in the Global Favourites State
+  // Array. If it does, it returns `true`, otherwise `false`;
+  const hasFavourites = () => (favourites.length > 0) ? true : false;
+
+
+  // This function checks if Global Favourites State Array has more than one
+  // favourite in it. If so, the `FavIcon` (little red circle) in the `FavBadge`
+  // (which sits in the top-right corner of the heart icon on the Top
+  // Navigation Bar), will light up.
+  const moreThanOneFavouriteAdded = () => (favourites.length > 1) ? true : false;
+
+
   // `Console.log()` STATEMENTS MAY NOT PROPERLY SHOW HOOK DATA UNTIL AFTER RE-RENDER (???)
   //
-  // Note: React is counterintuitive in some ways. If you change the state in
+  // Note: React is counter intuitive in some ways. If you change the state in
   // a function and IMMEDIATELY try to print out the array, that (probably)
-  // won't work. The state is NOT immediately changed. So, it's better to put
-  // the `console.log()` statement outside the function where it will get
-  // triggered on re-render.
+  // won't work. The state is NOT immediately changed. Neither does it seem to
+  // work at the bottom of the function. So, it's better to put the
+  // `console.log()` statement outside the function where it will get
+  // triggered on re-render (and towards the top of the page ???).
   // console.log(favourites);
+  // console.log(hasFavourites());
 
 
   // UPDATE THE GLOBAL FAVOURITES STATE ARRAY
@@ -73,10 +87,11 @@ const HomeRoute = () => {
   return (
 
     <div className="home-route">
-      <TopNavigationBar />
-      <PhotoList
-        updateGlobalFavouritesList={updateGlobalFavouritesList}
+      <TopNavigationBar
+        hasFavourites={hasFavourites}
+        moreThanOneFavouriteAdded={moreThanOneFavouriteAdded}
       />
+      <PhotoList updateGlobalFavouritesList={updateGlobalFavouritesList} />
     </div>
 
   );
