@@ -63,28 +63,31 @@ import PhotoListItem from "./PhotoListItem";
 // ];
 
 
+const PhotoList = (props) => {
 
-const PhotoList = () => {
+  // EXTRACT VALUES FROM PROPS
+  const updateGlobalFavouritesList = props.updateGlobalFavouritesList;
 
 
   return (
+
     <ul className="photo-list">
 
       {/* Iterate over the data source, and generate `PhotoListItem` templates
           for each photo. These templates will be passed `key` and `photoData`
           values so that the `PhotoListItem` can be populated.
       */}
-      {photos.map((photoData) => (
+      {photos.map((photo) => (
 
         <PhotoListItem
 
-          key={photoData.id}
-          photoData={photoData}
+          key={photo.id}
+          photo={photo}
+          updateGlobalFavouritesList={updateGlobalFavouritesList}
 
         />
 
       ))}
-
 
     </ul>
   );

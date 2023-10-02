@@ -6,16 +6,24 @@ import PhotoFavButton from "./PhotoFavButton";
 // Returns a `PhotoListItem`.
 const PhotoListItem = (props) => {
 
-  // Extract photo data from props.
-  const { urls, user, location } = props.photoData;
-  const key = props.key;
+  // EXTRACT VALUES FROM PROPS
+  const { id, urls, user, location } = props.photo;
+  const updateGlobalFavouritesList = props.updateGlobalFavouritesList;
+
+
+  // You can use log statements in React, but NOT inside the `return` statement.
+  // console.log(`PhotoListItem: ${id}`);
 
 
   return (
 
-    <section className="photo-list__item" key={key}>
+    <section className="photo-list__item">
 
-      <PhotoFavButton />
+      <PhotoFavButton
+        key={id}
+        photoId={id}
+        updateGlobalFavouritesList={updateGlobalFavouritesList}
+      />
 
       <img className="photo-list__image" src={urls.regular} />
 

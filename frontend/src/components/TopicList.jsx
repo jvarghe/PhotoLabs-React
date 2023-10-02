@@ -37,7 +37,7 @@ const TopicList = () => {
 
         <TopicListItem
 
-          key={topics.id}
+          key={topicData.id}
           topicData={topicData}
 
         />

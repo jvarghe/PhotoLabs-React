@@ -12,7 +12,6 @@ import "../styles/TopicListItem.scss";
 
 const TopicListItem = (props) => {
 
-  const key = props.key;
   const topicData = props.topicData;
 
 
