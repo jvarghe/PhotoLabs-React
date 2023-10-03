@@ -13,8 +13,10 @@ const App = () => {
 
 
   // This function open `PhotoDetailsModal` when an image is clicked.
-  const handlePhotoClick = function() {
+  const handlePhotoClick = function(photoData) {
     setIsModalOpen(true);
+
+    console.log(photoData);
   };
 
 
