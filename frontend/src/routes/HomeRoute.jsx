@@ -46,14 +46,27 @@ const HomeRoute = (props) => {
     // Check if the Favourites State Array contains the given photo...
     if (!favourites.includes(photoId)) {
 
-      // CORRECTLY MUTATING A STATE ARRAY
-      //
-      // A state array cannot be directly mutated because that could lead to
-      // data loss or corruption. So you cannot do `setFavourites(favourites)`
-      // That will not work in React. Instead, you have to first create a copy
-      // of the array, mutate that and use `setFavourites(favouritesCopy)` to
-      // point to the new array.
-      //
+      /* CORRECTLY MUTATING A STATE ARRAY/OBJECT
+       *
+       * A state array/object cannot be directly mutated because React only
+       * monitors the reference—it won't notice its internals changing! And
+       * because React only re-renders a component when it notices changes to
+       * its state/props, the page's state will NOT be updated.
+       *
+       * So, while you can use `setFavourites(favourites)` to update the
+       * `favourites` array, React will not be aware of the change or refresh
+       * the page with the new information.
+       *
+       * Instead, the recommended way of updating a state array/object is to
+       * first create a copy of the object and mutate it as you wish. Then,
+       * you can point state object handle to the new object. This should
+       * update the state object AND trigger a refresh of component/web page.
+       *
+       * In this situation, I will create a copy of the favourites array,
+       * mutate that and use `setFavourites(favouritesCopy)` to point to the
+       * new array.
+       */
+
       // If the state array does not contain a photo ID, create a copy of the
       // array, add `favourites` to the new array via the spread (...) operator,
       // as well as the photo ID you want to add. Then update the state Array
