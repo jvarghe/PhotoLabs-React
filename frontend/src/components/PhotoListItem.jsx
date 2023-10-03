@@ -7,8 +7,9 @@ import PhotoFavButton from "./PhotoFavButton";
 const PhotoListItem = (props) => {
 
   // EXTRACT VALUES FROM PROPS
-  const { id, urls, user, location } = props.photo;
+  const { id, urls, user, location, } = props.photo;
   const updateGlobalFavouritesList = props.updateGlobalFavouritesList;
+  const handlePhotoClick = props.handlePhotoClick;
 
 
   // You can use log statements in React, but NOT inside the `return` statement.
@@ -25,7 +26,7 @@ const PhotoListItem = (props) => {
         updateGlobalFavouritesList={updateGlobalFavouritesList}
       />
 
-      <img className="photo-list__image" src={urls.regular} />
+      <img className="photo-list__image" src={urls.regular} onClick={handlePhotoClick} />
 
 
       <div className="photo-list__user-details">

@@ -67,6 +67,7 @@ const PhotoList = (props) => {
 
   // EXTRACT VALUES FROM PROPS
   const updateGlobalFavouritesList = props.updateGlobalFavouritesList;
+  const handlePhotoClick = props.handlePhotoClick;
 
 
   return (
@@ -83,6 +84,7 @@ const PhotoList = (props) => {
 
           key={photo.id}
           photo={photo}
+          handlePhotoClick={handlePhotoClick}
           updateGlobalFavouritesList={updateGlobalFavouritesList}
 
         />

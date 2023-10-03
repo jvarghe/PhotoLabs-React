@@ -6,7 +6,11 @@ import TopNavigationBar from 'components/TopNavigationBar';
 import '../styles/HomeRoute.scss';
 
 
-const HomeRoute = () => {
+const HomeRoute = (props) => {
+
+  // EXTRACT VALUES FROM PROPS
+  const { handlePhotoClick } = props;
+
 
   // GLOBAL FAVOURITES STATE ARRAY
   // This hook basically mutates an array called `globalFavouritePhotosList`
@@ -81,7 +85,10 @@ const HomeRoute = () => {
 
     <div className="home-route">
       <TopNavigationBar hasFavourites={hasFavourites} />
-      <PhotoList updateGlobalFavouritesList={updateGlobalFavouritesList} />
+      <PhotoList
+        handlePhotoClick={handlePhotoClick}
+        updateGlobalFavouritesList={updateGlobalFavouritesList}
+      />
     </div>
 
   );

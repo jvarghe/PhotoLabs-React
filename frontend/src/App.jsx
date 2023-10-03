@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import HomeRoute from 'routes/HomeRoute';
 
@@ -7,6 +7,23 @@ import './App.scss';
 
 
 const App = () => {
+
+  // USESTATE HOOK FOR `PHOTO DETAILS MODAL`
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  // This function open `PhotoDetailsModal` when an image is clicked.
+  const handlePhotoClick = function() {
+    setIsModalOpen(true);
+  };
+
+
+  // This function closes the `PhotoDetailsModal` when the `X` is clicked.
+  const handleModalClose = function() {
+    setIsModalOpen(false);
+  };
+
+
 
   return (
 
@@ -25,9 +42,9 @@ const App = () => {
 
 
 
-      <HomeRoute />
+      <HomeRoute handlePhotoClick={handlePhotoClick} />
 
-      <PhotoDetailsModal />
+      {isModalOpen === true && <PhotoDetailsModal handleModalClose={handleModalClose} />}
 
     </div>
 
