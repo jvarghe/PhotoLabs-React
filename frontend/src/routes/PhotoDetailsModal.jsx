@@ -53,15 +53,15 @@ const PhotoDetailsModal = (props) => {
         </button>
       </div>
 
-      {/* THE FAVOURITE BUTTON IN THE TOP-LEFT CORNER OF THE PRIMARY IMAGE */}
-      <PhotoFavButton
-        photoId={photoData.id}
-        updateGlobalFavouritesList={updateGlobalFavouritesList}
-      />
-
 
       {/* THE PRIMARY CONTAINER FOR THE MODAL  */}
       <div className="photo-details-modal__images">
+
+        {/* THE FAVOURITE BUTTON IN THE TOP-LEFT CORNER OF THE PRIMARY IMAGE */}
+        <PhotoFavButton
+          photoId={photoData.id}
+          updateGlobalFavouritesList={updateGlobalFavouritesList}
+        />
 
         {/* THE CONTAINER FOR THE PRIMARY IMAGE */}
         <img src={photoData.urls.full} className="photo-details-modal__image" />
