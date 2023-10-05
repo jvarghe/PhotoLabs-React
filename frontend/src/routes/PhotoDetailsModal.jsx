@@ -91,7 +91,9 @@ const PhotoDetailsModal = (props) => {
 
 
         <PhotoList className="photo-details-modal__images"
+          photoId={photoData.id}
           photos={similarPhotos}
+          updateGlobalFavouritesList={updateGlobalFavouritesList}
         />
 
       </div>
