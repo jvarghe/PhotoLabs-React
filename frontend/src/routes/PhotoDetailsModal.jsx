@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import PhotoFavButton from 'components/PhotoFavButton';
 import PhotoList from 'components/PhotoList';
 import closeSymbol from '../assets/closeSymbol.svg';
 
@@ -8,7 +9,11 @@ import '../styles/PhotoDetailsModal.scss';
 
 const PhotoDetailsModal = (props) => {
 
-  const { handleModalClose, photoData } = props;
+  const {
+    handleModalClose,
+    photoData,
+    updateGlobalFavouritesList
+  } = props;
 
 
   // `photoData.similarPhotos` contains similar photos to the one being
@@ -47,6 +52,12 @@ const PhotoDetailsModal = (props) => {
           <img src={closeSymbol} alt="close symbol" />
         </button>
       </div>
+
+      {/* THE FAVOURITE BUTTON IN THE TOP-LEFT CORNER OF THE PRIMARY IMAGE */}
+      <PhotoFavButton
+        photoId={photoData.id}
+        updateGlobalFavouritesList={updateGlobalFavouritesList}
+      />
 
 
       {/* THE PRIMARY CONTAINER FOR THE MODAL  */}
