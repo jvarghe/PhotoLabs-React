@@ -9,7 +9,7 @@ import '../styles/HomeRoute.scss';
 const HomeRoute = (props) => {
 
   // EXTRACT VALUES FROM PROPS
-  const { handlePhotoClick } = props;
+  const { handlePhotoClick, photos } = props;
 
 
   // GLOBAL FAVOURITES STATE ARRAY
@@ -99,6 +99,7 @@ const HomeRoute = (props) => {
     <div className="home-route">
       <TopNavigationBar hasFavourites={hasFavourites} />
       <PhotoList
+        photos={photos}
         handlePhotoClick={handlePhotoClick}
         updateGlobalFavouritesList={updateGlobalFavouritesList}
       />

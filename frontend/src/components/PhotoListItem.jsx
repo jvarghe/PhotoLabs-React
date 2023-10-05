@@ -20,6 +20,7 @@ const PhotoListItem = (props) => {
 
   // You can use log statements in React, but NOT inside the `return` statement.
   // console.log(`PhotoListItem: ${id}`);
+  // console.log(photoData);
 
 
   return (
@@ -31,7 +32,10 @@ const PhotoListItem = (props) => {
         updateGlobalFavouritesList={updateGlobalFavouritesList}
       />
 
-      <img className="photo-list__image" src={urls.regular} onClick={() => handlePhotoClick(photoData)} />
+      <img className="photo-list__image"
+        src={urls.regular}
+        onClick={() => handlePhotoClick(photoData)}
+      />
 
 
       <div className="photo-list__user-details">

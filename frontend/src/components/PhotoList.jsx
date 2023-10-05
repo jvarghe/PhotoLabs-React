@@ -1,6 +1,5 @@
 import React from "react";
 
-import photos from "mocks/photos";
 import "../styles/PhotoList.scss";
 
 import PhotoListItem from "./PhotoListItem";
@@ -66,8 +65,11 @@ import PhotoListItem from "./PhotoListItem";
 const PhotoList = (props) => {
 
   // EXTRACT VALUES FROM PROPS
-  const updateGlobalFavouritesList = props.updateGlobalFavouritesList;
-  const handlePhotoClick = props.handlePhotoClick;
+  const {
+    updateGlobalFavouritesList,
+    handlePhotoClick,
+    photos
+  } = props;
 
 
   return (
