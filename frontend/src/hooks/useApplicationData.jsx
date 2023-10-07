@@ -2,6 +2,11 @@
 import { useState } from "react";
 
 
+// The core logic for the application has been moved from `App.jsx` to this
+// file. `App.jsx` was starting to get too big. This is a custom hook that
+// contains much of the logic for the application. It exports an object
+// containing references to both state variables and functions. `App.jsx`
+// imports and uses this object within, greatly cleaning up that file.
 const useApplicationData = function() {
 
 
@@ -150,10 +155,6 @@ const useApplicationData = function() {
   };
 
 };
-
-
-
-
 
 
 
