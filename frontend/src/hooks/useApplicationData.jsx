@@ -144,7 +144,7 @@ const useApplicationData = function() {
     // Function References
     handleModalClose,
     handlePhotoClick,
-    // hasFavouritePhotos,
+    hasFavouritePhotos,
     updateGlobalFavouritesList
 
   };
