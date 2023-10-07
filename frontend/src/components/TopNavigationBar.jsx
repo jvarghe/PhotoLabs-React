@@ -8,7 +8,7 @@ import '../styles/TopNavigationBar.scss';
 
 const TopNavigationBar = (props) => {
 
-  const { hasFavourites } = props;
+  const { hasFavouritePhotos } = props;
 
 
   return (
@@ -21,7 +21,7 @@ const TopNavigationBar = (props) => {
       <TopicList />
 
       {/* THE FAVOURITE BADGE */}
-      <FavBadge hasFavourites={hasFavourites} />
+      <FavBadge hasFavouritePhotos={hasFavouritePhotos} />
 
     </div>
   );

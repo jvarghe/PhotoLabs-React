@@ -11,14 +11,14 @@ const HomeRoute = (props) => {
   // EXTRACT VALUES FROM PROPS
   const {
     handlePhotoClick,
-    hasFavourites,
+    hasFavouritePhotos,
     photos,
     updateGlobalFavouritesList } = props;
 
   return (
 
     <div className="home-route">
-      <TopNavigationBar hasFavourites={hasFavourites} />
+      <TopNavigationBar hasFavouritePhotos={hasFavouritePhotos} />
       <PhotoList
         photos={photos}
         handlePhotoClick={handlePhotoClick}
