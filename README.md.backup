@@ -25,7 +25,7 @@ PhotoLabs is a great way to learn React-related skills, which include:
  * Data Flow in React (Passing Data to Child Components via Props; Keys)
  * Conditional Rendering
  * State Management & Immutable Update Patterns
- * Controlled Components (Override HTML (form) elements to let React control their state.)
+ * Controlled Components (Override HTML elements to let React control their state.)
  
  * React Hooks (`useState()`, `useReduce()`, `useEffect()`, and custom hooks)
  * Interfacing with the Backend API
