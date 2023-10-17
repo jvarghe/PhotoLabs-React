@@ -1,7 +1,6 @@
 import React from 'react';
 
 import useApplicationData from 'hooks/useApplicationData';
-import photos from "mocks/photos";
 
 import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
@@ -62,7 +61,8 @@ const App = () => {
       <HomeRoute
         handlePhotoClick={handlePhotoClick}
         hasFavouritePhotos={state.favouritePhotos.length > 0}
-        photos={photos}
+        photos={state.photos}
+        topics={state.topics}
         updateGlobalFavouritesList={updateGlobalFavouritesList}
       />
 

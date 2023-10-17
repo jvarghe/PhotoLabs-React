@@ -8,7 +8,7 @@ import '../styles/TopNavigationBar.scss';
 
 const TopNavigationBar = (props) => {
 
-  const { hasFavouritePhotos } = props;
+  const { hasFavouritePhotos, topics } = props;
 
 
   return (
@@ -18,7 +18,7 @@ const TopNavigationBar = (props) => {
       <span className="top-nav-bar__logo">PhotoLabs</span>
 
       {/* THE TOPIC LIST */}
-      <TopicList />
+      <TopicList topics={topics} />
 
       {/* THE FAVOURITE BADGE */}
       <FavBadge hasFavouritePhotos={hasFavouritePhotos} />

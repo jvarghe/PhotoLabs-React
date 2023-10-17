@@ -1,5 +1,5 @@
 // IMPORTS
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 // `useApplicationData()`: A CUSTOM HOOK FOR MANAGING STATE DATA
 
@@ -38,7 +38,9 @@ const useApplicationData = function() {
 
     HANDLE_PHOTO_CLICK: "HANDLE_PHOTO_CLICK",
     HANDLE_MODAL_CLOSE: "HANDLE_MODAL_CLOSE",
-    UPDATE_GLOBAL_FAVOURITES_LIST: "UPDATE_GLOBAL_FAVOURITES_LIST"
+    UPDATE_GLOBAL_FAVOURITES_LIST: "UPDATE_GLOBAL_FAVOURITES_LIST",
+    SET_PHOTOS: "SET_PHOTOS",
+    SET_TOPICS: "SET_TOPICS"
 
   };
 
@@ -49,7 +51,7 @@ const useApplicationData = function() {
   const reducer = function(state, action) {
 
     // Fixing state BEFORE changes to state.
-    // console.log("reducer() method triggered!:", action);
+    // console.log("reducer() method triggered!:", action.type);
 
     // The `reducer` function will fall through cases, until it reaches the
     // appropriate one, then execute all defined actions.
@@ -67,6 +69,7 @@ const useApplicationData = function() {
         isModalOpen: action.payload.isModalOpen,
       };
 
+
     // When the Photo Details Modal is closed, the `selectedPhoto` is being
     // set to `null` and `isModalOpen` set to `false`.
     case ACTIONS.HANDLE_MODAL_CLOSE:
@@ -76,8 +79,9 @@ const useApplicationData = function() {
         isModalOpen: action.payload.setIsModalOpen
       };
 
-      // When the user clicks on the favourites button, it toggles back-and-forth
-      // between favouriting and unfavouriting the photo.
+
+    // When the user clicks on the favourites button, it toggles back-and-forth
+    // between favouriting and unfavouriting the photo.
     case ACTIONS.UPDATE_GLOBAL_FAVOURITES_LIST:
 
       // If the `favouritePhotos` array does NOT contain the clicked photo's Id,
@@ -117,6 +121,39 @@ const useApplicationData = function() {
       }
 
 
+    // This case handles the loading of the photo catalogue from the backend.
+    // Note that `const photosCopy = [...state.photos];` is NOT being done here,
+    // because it creates an array of arrays. The first sub-array is empty and
+    // second contains the photo set. This broke the whole program. That took
+    // me an hour to debug!
+    //
+    // Note: If you need to declare variables within a `case`, this is NOT
+    // allowed by ESLint unless you wrap the whole contents in braces as shown
+    // below. The error message: Unexpected lexical declaration in case block.
+    case ACTIONS.SET_PHOTOS: {
+
+      const photosCopy = action.payload.photos;
+
+      return {
+        ...state,
+        photos: photosCopy
+      };
+
+    }
+
+
+    // This case loads values into the `topics` state variable. If you want an
+    // easier way of doing the same thing as `ACTIONS.SET_PHOTOS`, this is it.
+    // (Load data into an immutable state variable.)
+    case ACTIONS.SET_TOPICS: {
+
+      return {
+        ...state,
+        topics: action.payload.topics
+      };
+
+    }
+
     default:
       throw new Error(
         `Tried to invoke unsupported action type: ${action.type}`
@@ -141,6 +178,10 @@ const useApplicationData = function() {
     selectedPhoto: null,
     isModalOpen: false,
     favouritePhotos: [],
+
+    // Photo and Topics feed being pulled from the app's backend.
+    photos: [],
+    topics: []
   });
 
 
@@ -194,6 +235,47 @@ const useApplicationData = function() {
     });
 
   };
+
+
+  // USEEFFECT FUNCTIONS
+
+  // This function fetches photos from `api/photos`.
+  useEffect(() => {
+
+    fetch("api/photos")
+      .then(res => res.json())
+      .then(data => {
+
+        dispatch({
+          type: ACTIONS.SET_PHOTOS,
+          payload: {
+            photos: data
+          }
+        });
+
+      });
+
+
+  }, []);
+
+
+  // This function fetches topics from `api/topics`.
+  useEffect(() => {
+
+    fetch("api/topics")
+      .then(res => res.json())
+      .then(data => {
+
+        dispatch({
+          type: ACTIONS.SET_TOPICS,
+          payload: {
+            topics: data
+          }
+        });
+
+      });
+
+  }, []);
 
 
   // USESTATE FUNCTIONS

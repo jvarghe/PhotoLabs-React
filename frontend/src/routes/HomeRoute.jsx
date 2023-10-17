@@ -13,13 +13,18 @@ const HomeRoute = (props) => {
     handlePhotoClick,
     hasFavouritePhotos,
     photos,
+    topics,
     updateGlobalFavouritesList
   } = props;
 
   return (
 
     <div className="home-route">
-      <TopNavigationBar hasFavouritePhotos={hasFavouritePhotos} />
+      <TopNavigationBar
+        hasFavouritePhotos={hasFavouritePhotos}
+        topics={topics}
+      />
+
       <PhotoList
         photos={photos}
         handlePhotoClick={handlePhotoClick}
