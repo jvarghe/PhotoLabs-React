@@ -26,19 +26,21 @@ const App = () => {
    */
   const {
 
+    state,
+
     // State Values
-    selectedPhoto,
-    isModalOpen,
+    // selectedPhoto,
+    // isModalOpen,
 
     // Function References
     handleModalClose,
     handlePhotoClick,
-    hasFavouritePhotos,
     updateGlobalFavouritesList
 
   } = useApplicationData();
 
 
+  // console.log("State from App.jsx: ", state);
 
   return (
 
@@ -59,16 +61,17 @@ const App = () => {
 
       <HomeRoute
         handlePhotoClick={handlePhotoClick}
-        hasFavouritePhotos={hasFavouritePhotos}
+        hasFavouritePhotos={state.favouritePhotos.length > 0}
         photos={photos}
         updateGlobalFavouritesList={updateGlobalFavouritesList}
       />
 
-      {isModalOpen === true &&
+      {state.isModalOpen === true &&
         <PhotoDetailsModal
           handleModalClose={handleModalClose}
-          photoData={selectedPhoto}
+          photoData={state.selectedPhoto}
           updateGlobalFavouritesList={updateGlobalFavouritesList}
+          state={state}
         />
       }
 

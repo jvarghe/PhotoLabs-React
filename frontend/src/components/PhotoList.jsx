@@ -68,7 +68,7 @@ const PhotoList = (props) => {
   const {
     updateGlobalFavouritesList,
     handlePhotoClick,
-    photos
+    photos,
   } = props;
 
 
@@ -88,7 +88,7 @@ const PhotoList = (props) => {
           photo={photo}
           handlePhotoClick={handlePhotoClick}
           updateGlobalFavouritesList={updateGlobalFavouritesList}
-
+          
         />
 
       ))}

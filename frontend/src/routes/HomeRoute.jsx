@@ -13,7 +13,8 @@ const HomeRoute = (props) => {
     handlePhotoClick,
     hasFavouritePhotos,
     photos,
-    updateGlobalFavouritesList } = props;
+    updateGlobalFavouritesList
+  } = props;
 
   return (
 
