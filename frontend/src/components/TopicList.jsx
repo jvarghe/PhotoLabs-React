@@ -27,7 +27,7 @@ import TopicListItem from "./TopicListItem";
 
 const TopicList = (props) => {
 
-  const { topics } = props;
+  const { handleTopicSelection, topics } = props;
 
 
   return (
@@ -39,6 +39,7 @@ const TopicList = (props) => {
         <TopicListItem
 
           key={topic.id}
+          handleTopicSelection={handleTopicSelection}
           topicData={topic}
 
         />

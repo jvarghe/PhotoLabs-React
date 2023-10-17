@@ -11,6 +11,7 @@ const HomeRoute = (props) => {
   // EXTRACT VALUES FROM PROPS
   const {
     handlePhotoClick,
+    handleTopicSelection,
     hasFavouritePhotos,
     photos,
     topics,
@@ -21,6 +22,7 @@ const HomeRoute = (props) => {
 
     <div className="home-route">
       <TopNavigationBar
+        handleTopicSelection={handleTopicSelection}
         hasFavouritePhotos={hasFavouritePhotos}
         topics={topics}
       />

@@ -12,13 +12,13 @@ import "../styles/TopicListItem.scss";
 
 const TopicListItem = (props) => {
 
-  const topicData = props.topicData;
+  const { topicData, handleTopicSelection } = props;
 
 
   return (
     <div className="topic-list__item">
 
-      <p>{topicData.title}</p>
+      <span onClick={() => handleTopicSelection(topicData.id)}>{topicData.title}</span>
 
     </div>
   );

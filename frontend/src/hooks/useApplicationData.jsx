@@ -36,6 +36,7 @@ const useApplicationData = function() {
   // `reducer` function will take.
   const ACTIONS = {
 
+    GET_PHOTOS_BY_TOPICS: "GET_PHOTOS_BY_TOPICS",
     HANDLE_PHOTO_CLICK: "HANDLE_PHOTO_CLICK",
     HANDLE_MODAL_CLOSE: "HANDLE_MODAL_CLOSE",
     UPDATE_GLOBAL_FAVOURITES_LIST: "UPDATE_GLOBAL_FAVOURITES_LIST",
@@ -57,11 +58,21 @@ const useApplicationData = function() {
     // appropriate one, then execute all defined actions.
     switch (action.type) {
 
-    // If the photo is clicked, copy the `state` variable into the `return`
-    // object. Then, modify the `state` object's values.
-    //
-    // In this case, the selected photo's data is being loaded into the
-    // property, and modal's status is being set to `true`.
+
+    // When the user clicks on a topic in the navigation bar, this case will
+    // set the current `topicId` to selected topic.
+    case ACTIONS.GET_PHOTOS_BY_TOPICS:
+      return {
+        ...state,
+        topicId: action.payload.topicId
+      };
+
+
+      // If the photo is clicked, copy the `state` variable into the `return`
+      // object. Then, modify the `state` object's values.
+      //
+      // In this case, the selected photo's data is being loaded into the
+      // property, and modal's status is being set to `true`.
     case ACTIONS.HANDLE_PHOTO_CLICK:
       return {
         ...state,
@@ -70,8 +81,8 @@ const useApplicationData = function() {
       };
 
 
-    // When the Photo Details Modal is closed, the `selectedPhoto` is being
-    // set to `null` and `isModalOpen` set to `false`.
+      // When the Photo Details Modal is closed, the `selectedPhoto` is being
+      // set to `null` and `isModalOpen` set to `false`.
     case ACTIONS.HANDLE_MODAL_CLOSE:
       return {
         ...state,
@@ -80,8 +91,8 @@ const useApplicationData = function() {
       };
 
 
-    // When the user clicks on the favourites button, it toggles back-and-forth
-    // between favouriting and unfavouriting the photo.
+      // When the user clicks on the favourites button, it toggles back-and-forth
+      // between favouriting and unfavouriting the photo.
     case ACTIONS.UPDATE_GLOBAL_FAVOURITES_LIST:
 
       // If the `favouritePhotos` array does NOT contain the clicked photo's Id,
@@ -121,15 +132,15 @@ const useApplicationData = function() {
       }
 
 
-    // This case handles the loading of the photo catalogue from the backend.
-    // Note that `const photosCopy = [...state.photos];` is NOT being done here,
-    // because it creates an array of arrays. The first sub-array is empty and
-    // second contains the photo set. This broke the whole program. That took
-    // me an hour to debug!
-    //
-    // Note: If you need to declare variables within a `case`, this is NOT
-    // allowed by ESLint unless you wrap the whole contents in braces as shown
-    // below. The error message: Unexpected lexical declaration in case block.
+      // This case handles the loading of the photo catalogue from the backend.
+      // Note that `const photosCopy = [...state.photos];` is NOT being done here,
+      // because it creates an array of arrays. The first sub-array is empty and
+      // second contains the photo set. This broke the whole program. That took
+      // me an hour to debug!
+      //
+      // Note: If you need to declare variables within a `case`, this is NOT
+      // allowed by ESLint unless you wrap the whole contents in braces as shown
+      // below. The error message: Unexpected lexical declaration in case block.
     case ACTIONS.SET_PHOTOS: {
 
       const photosCopy = action.payload.photos;
@@ -154,6 +165,8 @@ const useApplicationData = function() {
 
     }
 
+
+    // This is the default case and it will handle errors.
     default:
       throw new Error(
         `Tried to invoke unsupported action type: ${action.type}`
@@ -181,7 +194,10 @@ const useApplicationData = function() {
 
     // Photo and Topics feed being pulled from the app's backend.
     photos: [],
-    topics: []
+    topics: [],
+
+    topicId: null
+
   });
 
 
@@ -221,6 +237,19 @@ const useApplicationData = function() {
   };
 
 
+  // This function responds to clicks on the Topics List on `TopNavigationBar`.
+  const handleTopicSelection = function(topicId) {
+
+    dispatch({
+      type: ACTIONS.GET_PHOTOS_BY_TOPICS,
+      payload: {
+        topicId: topicId
+      }
+    });
+
+  };
+
+
   // This is a `reducer` function that toggles favourites. If the photo is
   // already favourited, it will be unfavourited and vice versa.
   const updateGlobalFavouritesList = function(photoId) {
@@ -238,6 +267,7 @@ const useApplicationData = function() {
 
 
   // USEEFFECT FUNCTIONS
+  // These functions are intended to control side effects in components.
 
   // This function fetches photos from `api/photos`.
   useEffect(() => {
@@ -253,8 +283,10 @@ const useApplicationData = function() {
           }
         });
 
+      })
+      .catch((error) => {
+        console.error(" `api/photos` useEffect Error:", error);
       });
-
 
   }, []);
 
@@ -273,9 +305,44 @@ const useApplicationData = function() {
           }
         });
 
+      })
+      .catch((error) => {
+        console.error(" `api/topics` useEffect Error:", error);
       });
 
   }, []);
+
+
+  // This function monitors `state.topicId` for changes. When it changes (when
+  // a user clicks on a topic in the nav bar), the function queries the backend
+  // for other photos in the same category. It returns an array of objects,
+  // each object containing data on a photo. This is set to be the current
+  // photo set, which should load all these photos in the App.
+  useEffect(() => {
+
+    if (state.topicId) {
+
+      fetch(`api/topics/photos/${state.topicId}`)
+        .then(res => res.json())
+        .then(data => {
+
+
+          dispatch({
+            type: ACTIONS.SET_PHOTOS,
+            payload: {
+              photos: data
+            }
+          });
+
+        })
+        .catch((error) => {
+          console.error(" `api/topics/photos/:topic_id` useEffect Error:", error);
+        });
+
+    }
+
+  }, [state.topicId]);
+
 
 
   // USESTATE FUNCTIONS
@@ -421,6 +488,7 @@ const useApplicationData = function() {
     // Function References
     handleModalClose,
     handlePhotoClick,
+    handleTopicSelection,
     // Is unnecessary, because `hasFavouritePhotos` is being set to
     // `{state.favouritePhotos.length > 0} in `App.jsx`.
     // hasFavouritePhotos,

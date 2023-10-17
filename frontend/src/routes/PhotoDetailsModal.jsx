@@ -16,29 +16,35 @@ const PhotoDetailsModal = (props) => {
   } = props;
 
 
+  // THIS FUNCTION WAS NECESSARY FOR MOCK DATA, BUT IS DISABLED BECAUSE IT IS
+  // UNNECESSARY FOR FILES DRAWN FROM THE BACKEND API
+  // (Backend API data comes in array format, so no conversion is necessary.
+  // Also, Mock Data files use the key name `similarPhotos`, while backend API
+  // data uses `similar_photos`).
+  //
   // `photoData.similarPhotos` contains similar photos to the one being
   // currently displayed in the modal. These list of the similar photos needs
   // to be passed to `PhotoList` below, so that they can be rendered in the
   // `Similar Photos` section of the `PhotoDetailsModal`. Unfortunately, this
   // list is wrapped in an object but `PhotoList` is expecting an array. This
   // function converts the object of objects into an array of objects.
-  const convertSimilarPhotosToArrayContainer = function(photosInObjectContainer) {
+  // const convertSimilarPhotosToArrayContainer = function(photosInObjectContainer) {
 
-    const arrayContainer = [];
-
-
-    for (let photoKey in photosInObjectContainer) {
-
-      arrayContainer.push(photosInObjectContainer[photoKey]);
-
-    }
-
-    return arrayContainer;
-
-  };
+  //   const arrayContainer = [];
 
 
-  const similarPhotos = convertSimilarPhotosToArrayContainer(photoData.similarPhotos);
+  //   for (let photoKey in photosInObjectContainer) {
+
+  //     arrayContainer.push(photosInObjectContainer[photoKey]);
+
+  //   }
+
+  //   return arrayContainer;
+
+  // };
+
+
+  // const similarPhotos = convertSimilarPhotosToArrayContainer(photoData.similarPhotos);
 
 
   return (
@@ -92,7 +98,7 @@ const PhotoDetailsModal = (props) => {
 
         <PhotoList className="photo-details-modal__images"
           photoId={photoData.id}
-          photos={similarPhotos}
+          photos={photoData.similar_photos}
           updateGlobalFavouritesList={updateGlobalFavouritesList}
         />
 

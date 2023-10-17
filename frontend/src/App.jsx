@@ -34,6 +34,7 @@ const App = () => {
     // Function References
     handleModalClose,
     handlePhotoClick,
+    handleTopicSelection,
     updateGlobalFavouritesList
 
   } = useApplicationData();
@@ -60,6 +61,7 @@ const App = () => {
 
       <HomeRoute
         handlePhotoClick={handlePhotoClick}
+        handleTopicSelection={handleTopicSelection}
         hasFavouritePhotos={state.favouritePhotos.length > 0}
         photos={state.photos}
         topics={state.topics}
