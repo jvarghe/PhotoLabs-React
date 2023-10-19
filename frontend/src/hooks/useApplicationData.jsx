@@ -207,15 +207,24 @@ const useApplicationData = function() {
   // This is a `reducer` function that responds to the clicks on photos.
   const handlePhotoClick = function(photoData) {
 
-    dispatch({
-      type: ACTIONS.HANDLE_PHOTO_CLICK,
+    // Photos can be clicked in the main page or within the `PhotoDetailsModal`.
+    // If the click happens within the main page, this method will open the
+    // modal. However, if photos are clicked within the modal, those clicks
+    // should be ignored; that is what this conditional statement is checking
+    // for.
+    if (state.isModalOpen !== true) {
 
-      payload: {
-        selectedPhoto: photoData,
-        isModalOpen: true
-      }
+      dispatch({
+        type: ACTIONS.HANDLE_PHOTO_CLICK,
 
-    });
+        payload: {
+          selectedPhoto: photoData,
+          isModalOpen: true
+        }
+
+      });
+
+    }
 
   };
 

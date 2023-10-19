@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { React } from 'react';
 
-import PhotoFavButton from 'components/PhotoFavButton';
 import PhotoList from 'components/PhotoList';
 import closeSymbol from '../assets/closeSymbol.svg';
+
+import ModalMainImage from 'components/ModalMainImage';
 
 import '../styles/PhotoDetailsModal.scss';
 
@@ -11,9 +12,12 @@ const PhotoDetailsModal = (props) => {
 
   const {
     handleModalClose,
+    handlePhotoClick,
     photoData,
     updateGlobalFavouritesList
   } = props;
+
+  console.log("PhotoDetailsModal: ", photoData, photoData.similar_photos);
 
 
   // THIS FUNCTION WAS NECESSARY FOR MOCK DATA, BUT IS DISABLED BECAUSE IT IS
@@ -52,6 +56,7 @@ const PhotoDetailsModal = (props) => {
     <div className="photo-details-modal">
 
 
+      {/* THE CLOSE BUTTON BAR AT THE TOP OF THE MODAL */}
       <div className="photo-details-modal__top-bar">
         {/* This is the "X" (close) button for this modal.  */}
         <button className="photo-details-modal__close-button" onClick={handleModalClose}>
@@ -60,46 +65,41 @@ const PhotoDetailsModal = (props) => {
       </div>
 
 
-      {/* THE PRIMARY CONTAINER FOR THE MODAL  */}
-      <div className="photo-details-modal__images">
+      {/* THE CONTAINER FOR THE PRIMARY IMAGE SECTION */}
+      <div className="photo-details-modal__image">
 
-        {/* THE FAVOURITE BUTTON IN THE TOP-LEFT CORNER OF THE PRIMARY IMAGE */}
-        <PhotoFavButton
-          photoId={photoData.id}
+        <ModalMainImage
+          photoData={photoData}
           updateGlobalFavouritesList={updateGlobalFavouritesList}
         />
-
-        {/* THE CONTAINER FOR THE PRIMARY IMAGE */}
-        <img src={photoData.urls.full} className="photo-details-modal__image" />
-
-        {/* The container for the photographer's details. */}
-        <div className="photo-details-modal__photographer-details">
-
-          {/* Photographer profile image. */}
-          <img className="photo-details-modal__photographer-profile" src={photoData.user.profile} />
-
-          {/* Photographer Name & Location. */}
-          <div className="photo-details-modal__photographer-info">
-            <p className="photo-details-modal__photographer-info">{photoData.user.username}</p>
-            <p className="photo-details-modal__photographer-location">{photoData.location.city}, {photoData.location.country}</p>
-          </div>
-
-        </div>
 
       </div>
 
 
-      {/* THE CONTAINER FOR `SIMILAR PHOTOS` */}
+      {/* THE CONTAINER FOR THE `SIMILAR PHOTOS` SECTION */}
       <div className="photo-details-modal__images">
 
         {/* THE TITLE OF THIS SECTION */}
         <h2 className="photo-details-modal__header">Similar Photos</h2>
 
 
-        <PhotoList className="photo-details-modal__images"
-          photoId={photoData.id}
+        <PhotoList
+
+          // The `similar_photos` property of `photoData` object is being
+          // passed in here. As in the previous container, `photos` is expecting
+          // an array. but `similar_photos` is already wrapped in an array.
+          // It doesn't need to be wrapped in `[]` unlike in the primary
+          // container.
           photos={photoData.similar_photos}
+
+          // The `handlePhotoClick()` function is supposed to open the modal
+          // view. But if it's already open, we don't want to open it again.
+          // We are passing in a function reference because `PhotoList` is
+          // expecting one, but the `handlePhotoClick()` function definition
+          // handles this case by ignoring it (`useApplicationData.jsx`).
+          handlePhotoClick={handlePhotoClick}
           updateGlobalFavouritesList={updateGlobalFavouritesList}
+
         />
 
       </div>

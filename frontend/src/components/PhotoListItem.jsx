@@ -9,7 +9,6 @@ const PhotoListItem = (props) => {
   // EXTRACT VALUES FROM PROPS
   const { id, urls, user, location, } = props.photo;
 
- 
   // On line 10, we destructured some useful information, but when the image
   // is clicked, we need to send all the data to the modal, so a new variable
   // is being created.

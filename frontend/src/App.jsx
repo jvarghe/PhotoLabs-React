@@ -71,9 +71,9 @@ const App = () => {
       {state.isModalOpen === true &&
         <PhotoDetailsModal
           handleModalClose={handleModalClose}
+          handlePhotoClick={handlePhotoClick}
           photoData={state.selectedPhoto}
           updateGlobalFavouritesList={updateGlobalFavouritesList}
-          state={state}
         />
       }
 
