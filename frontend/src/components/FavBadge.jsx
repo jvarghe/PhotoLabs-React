@@ -3,18 +3,16 @@ import FavIcon from './FavIcon';
 
 import '../styles/FavBadge.scss';
 
-const FavBadge = ({ hasFavouritePhotos }) => {
+const FavBadge = ({ selected }) => {
 
   return (
     <div className='fav-badge'>
 
-      {/* OUT-OF-DATE: The Fav Icon is expecting actual (boolean) values, so
-        * I'm invoking the `hasFavouritePhotos` function references here, so
-        * that they pass in the values to the props in `FavIcon.jsx`.
-        */}
       <FavIcon
-        displayAlert={ hasFavouritePhotos }
-        selected={ hasFavouritePhotos }
+        // NOTE: `displayAlert` IS NOT IMPLEMENTED BECAUSE I'M NOT SURE WHAT
+        // TO DO WITH THE LITTLE YELLOW CIRCLE.
+        // displayAlert={ selected }
+        selected={selected}
       />
 
     </div>

@@ -66,6 +66,7 @@ const PhotoList = (props) => {
 
   // EXTRACT VALUES FROM PROPS
   const {
+    favouritePhotosList,
     updateGlobalFavouritesList,
     handlePhotoClick,
     photos,
@@ -85,6 +86,8 @@ const PhotoList = (props) => {
         <PhotoListItem
 
           key={photo.id}
+
+          favouritePhotosList={favouritePhotosList}
           photo={photo}
           handlePhotoClick={handlePhotoClick}
           updateGlobalFavouritesList={updateGlobalFavouritesList}

@@ -11,8 +11,7 @@ export default function ModalMainImage(props) {
   // EXTRACT VALUES FROM PROPS
   const photoData = props.photoData;
   const updateGlobalFavouritesList = props.updateGlobalFavouritesList;
-
-  // console.log("ModalMainImage: ", photoData);
+  const favouritePhotosList = props.favouritePhotosList;
 
 
   return (
@@ -21,6 +20,7 @@ export default function ModalMainImage(props) {
 
       {/* THE FAVOURITE ICON  */}
       <PhotoFavButton
+        favouritePhotosList={favouritePhotosList}
         photoId={photoData.id}
         updateGlobalFavouritesList={updateGlobalFavouritesList}
       />

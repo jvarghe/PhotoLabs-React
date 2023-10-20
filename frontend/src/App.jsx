@@ -60,9 +60,9 @@ const App = () => {
 
 
       <HomeRoute
+        favouritePhotosList={state.favouritePhotos}
         handlePhotoClick={handlePhotoClick}
         handleTopicSelection={handleTopicSelection}
-        hasFavouritePhotos={state.favouritePhotos.length > 0}
         photos={state.photos}
         topics={state.topics}
         updateGlobalFavouritesList={updateGlobalFavouritesList}
@@ -70,6 +70,7 @@ const App = () => {
 
       {state.isModalOpen === true &&
         <PhotoDetailsModal
+          favouritePhotosList={state.favouritePhotos}
           handleModalClose={handleModalClose}
           handlePhotoClick={handlePhotoClick}
           photoData={state.selectedPhoto}

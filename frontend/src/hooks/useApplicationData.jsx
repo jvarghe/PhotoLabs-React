@@ -48,7 +48,6 @@ const useApplicationData = function() {
 
   // This `reducer` function takes two variables declared in the `useReducer`
   // function, `state` and `action`. It checks the `action` object to see which
-  // action to undertake, and will accordingly update the `state` object.
   const reducer = function(state, action) {
 
     // Fixing state BEFORE changes to state.
@@ -101,14 +100,14 @@ const useApplicationData = function() {
       //
       // Note: The if-statement logic is running outside the `return` block. You
       // tried to run it within and ran into so many problems.
-      if (!state.favouritePhotos.includes(action.payload.photoId)) {
+      if (!state.favouritePhotos.includes(action.payload.favouritedPhoto)) {
 
         // As the state is immutable and cannot be directly changed, create a
         // copy of the property you want to change (an array of ID values
         // denoting favourited photos). Then, push changes (the newly added
         // photo ID) to the array copy.
         const newFavourites = [...state.favouritePhotos];
-        newFavourites.push(action.payload.photoId);
+        newFavourites.push(action.payload.favouritedPhoto);
 
         // Finally, return an object with the state and set the `favouritePhotos`
         // property to the array copy.
@@ -122,11 +121,9 @@ const useApplicationData = function() {
         // out in the copied array and return the object.
       } else {
 
-        const newFavourites = state.favouritePhotos.filter(photoKey => photoKey !== action.payload.photoId);
-
         return {
           ...state,
-          favouritePhotos: newFavourites
+          favouritePhotos: state.favouritePhotos.filter(photoKey => photoKey !== action.payload.favouritedPhoto)
         };
 
       }
@@ -267,7 +264,7 @@ const useApplicationData = function() {
       type: ACTIONS.UPDATE_GLOBAL_FAVOURITES_LIST,
 
       payload: {
-        favouritePhotos: photoId
+        favouritedPhoto: photoId
       }
 
     });
@@ -471,7 +468,7 @@ const useApplicationData = function() {
 
 
   // Tracking state AFTER changes to state.
-  // console.log("state after update: ", state);
+  // console.log("state after update: ", state.favouritePhotos);
 
   // Return an object containing references to state values and function
   // references.

@@ -8,7 +8,10 @@ import '../styles/TopNavigationBar.scss';
 
 const TopNavigationBar = (props) => {
 
-  const { handleTopicSelection, hasFavouritePhotos, topics } = props;
+  const {
+    favouritePhotosList,
+    handleTopicSelection,
+    topics } = props;
 
 
   return (
@@ -24,7 +27,9 @@ const TopNavigationBar = (props) => {
       />
 
       {/* THE FAVOURITE BADGE */}
-      <FavBadge hasFavouritePhotos={hasFavouritePhotos} />
+      <FavBadge
+        selected={favouritePhotosList.length > 0}
+      />
 
     </div>
   );

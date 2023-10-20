@@ -11,13 +11,14 @@ import '../styles/PhotoDetailsModal.scss';
 const PhotoDetailsModal = (props) => {
 
   const {
+    favouritePhotosList,
     handleModalClose,
     handlePhotoClick,
     photoData,
     updateGlobalFavouritesList
   } = props;
 
-  console.log("PhotoDetailsModal: ", photoData, photoData.similar_photos);
+  // console.log("PhotoDetailsModal: ", photoData, photoData.similar_photos);
 
 
   // THIS FUNCTION WAS NECESSARY FOR MOCK DATA, BUT IS DISABLED BECAUSE IT IS
@@ -69,6 +70,7 @@ const PhotoDetailsModal = (props) => {
       <div className="photo-details-modal__image">
 
         <ModalMainImage
+          favouritePhotosList={favouritePhotosList}
           photoData={photoData}
           updateGlobalFavouritesList={updateGlobalFavouritesList}
         />
@@ -84,6 +86,8 @@ const PhotoDetailsModal = (props) => {
 
 
         <PhotoList
+
+          favouritePhotosList={favouritePhotosList}
 
           // The `similar_photos` property of `photoData` object is being
           // passed in here. As in the previous container, `photos` is expecting

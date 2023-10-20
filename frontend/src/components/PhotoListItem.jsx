@@ -16,6 +16,7 @@ const PhotoListItem = (props) => {
 
   const updateGlobalFavouritesList = props.updateGlobalFavouritesList;
   const handlePhotoClick = props.handlePhotoClick;
+  const favouritePhotosList = props.favouritePhotosList;
 
 
   // You can use log statements in React, but NOT inside the `return` statement.
@@ -28,6 +29,7 @@ const PhotoListItem = (props) => {
     <section className="photo-list__item">
 
       <PhotoFavButton
+        favouritePhotosList={favouritePhotosList}
         photoId={id}
         updateGlobalFavouritesList={updateGlobalFavouritesList}
       />

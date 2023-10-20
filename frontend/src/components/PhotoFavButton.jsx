@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/PhotoFavButton.scss';
-import FavIcon from './FavIcon';
+import FavBadge from './FavBadge';
 
 
 
 const PhotoFavButton = function(props) {
 
   // EXTRACT VALUES FROM PROPS
-  const { photoId } = props;
+  const {
+    favouritePhotosList,
+    photoId,
+    updateGlobalFavouritesList
+  } = props;
 
-  // A reference to a function in `HomeRoute.jsx` that will manage a list of
-  // global favourite photos.
-  const updateGlobalFavouritesList = props.updateGlobalFavouritesList;
+  // console.log(favouritePhotosList);
 
+
+  // PRE-`useApplicationData` WAY OF MANAGING FAVOURITES
 
   // LESSON LEARNED: THE KEY IS NOT A PROP AND CANNOT BE USED IN YOUR CODE
   //
@@ -34,7 +38,21 @@ const PhotoFavButton = function(props) {
 
 
   // A USESTATE HOOK TO HANDLE CLICKS ON THE FAVOURITE BUTTON
-  const [isFavourite, setIsFavourite] = useState(false);
+  const [isFavouritedPhoto, setIsFavouritedPhoto] = useState(false);
+
+
+  // Whenever the user favourites a photo, it updates the Global Favourites
+  // List. This should affect the status of `isFavouritedPhoto`, so that we
+  // can control the appearance of Favourite button. So, we'll use this
+  // `useEffect()` hook to update `isFavouritedPhoto` whenever the Global
+  // Favourites List is updated.
+  useEffect(() => {
+
+    // For each image, query the Global Favourites List and check if it is on
+    // the list. If so, set `isFavouritedPhoto` to `true`, else `false`.
+    setIsFavouritedPhoto(favouritePhotosList.includes(photoId) ? true : false);
+
+  }, [favouritePhotosList]);
 
 
   // FAVOURITE BUTTON CLICK EVENT HANDLER
@@ -43,14 +61,9 @@ const PhotoFavButton = function(props) {
   // image by switching its status.
   const handleFavouriteButtonClick = function() {
 
-    // Update local favourite state; this will let you set change the status
-    // of the favourite icon (`FavIcon`: full or empty).
-    isFavourite === false ? setIsFavourite(true) : setIsFavourite(false);
-    // Alternate: setIsFavourite(!setIsFavourite);
-
-
-    // Once that's done, you should update the global favourites list so that
-    // this information can be used site-wide.
+    // Call the function that updates the global favourites list so that
+    // this information can be used app-wide. If the photo is NOT on the list,
+    // it will be added to it, and if it is on the list, it will be removed.
     updateGlobalFavouritesList(photoId);
 
   };
@@ -58,19 +71,17 @@ const PhotoFavButton = function(props) {
 
   return (
 
-    // Favourite Button
-    <div onClick={() => handleFavouriteButtonClick()} className="photo-list__fav-icon">
+    // THE FAVOURITE BUTTON
+    <div className="photo-list__fav-icon" onClick={handleFavouriteButtonClick}>
 
       {/* Styling for the Heart Icon. */}
       <div className="photo-list__fav-icon-svg">
 
-
-        {/* If the Photo has NOT been Favourited, AND the button is clicked... */}
-        {isFavourite === false && <FavIcon selected={false} />}
-
-        {/* If the Photo HAS been Favourited, AND the button is clicked... */}
-        {isFavourite === true && <FavIcon selected={true} />}
-
+        <FavBadge
+          // NOT IMPLEMENTED
+          // displayAlert={}
+          selected={isFavouritedPhoto}
+        />
 
       </div>
 

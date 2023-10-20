@@ -39,6 +39,7 @@ const FavIcon = ({ displayAlert, selected }) => {
 
       {/* The code for the little circle. */}
       {
+        // `!!` converts the `displayAlert` value to boolean.
         !!displayAlert &&
         <circle
           cx="21"
